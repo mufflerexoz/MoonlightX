@@ -158,8 +158,23 @@ public final class XboxUi {
         int count = grid.getCount();
         int columnWidth = grid.getRequestedColumnWidth();
         int spacing = grid.getRequestedHorizontalSpacing();
-        int available = grid.getWidth() - grid.getPaddingLeft() - grid.getPaddingRight();
-        if (count <= 0 || columnWidth <= 0 || available <= 0) {
+        if (count <= 0 || columnWidth <= 0 || grid.getWidth() <= 0) {
+            return;
+        }
+
+        // Remember the side padding from the layout; we add to it to center the tiles
+        Object stored = grid.getTag(R.id.xbox_base_padding);
+        int basePadding;
+        if (stored instanceof Integer) {
+            basePadding = (Integer) stored;
+        }
+        else {
+            basePadding = grid.getPaddingLeft();
+            grid.setTag(R.id.xbox_base_padding, basePadding);
+        }
+
+        int available = grid.getWidth() - 2 * basePadding;
+        if (available <= 0) {
             return;
         }
 
@@ -167,6 +182,14 @@ public final class XboxUi {
         int columns = Math.min(count, fit);
         if (grid.getNumColumns() != columns) {
             grid.setNumColumns(columns);
+        }
+
+        // GridView only centers a tile inside its own column, never the row of columns,
+        // so pad both sides equally to put the row of tiles in the middle of the screen
+        int used = columns * columnWidth + (columns - 1) * spacing;
+        int side = basePadding + Math.max(0, (available - used) / 2);
+        if (grid.getPaddingLeft() != side || grid.getPaddingRight() != side) {
+            grid.setPadding(side, grid.getPaddingTop(), side, grid.getPaddingBottom());
         }
     }
 

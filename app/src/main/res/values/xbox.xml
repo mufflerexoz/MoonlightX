@@ -7,6 +7,9 @@
     <color name="xbox_text_secondary">#8C8C8C</color>
     <color name="xbox_launch_spinner">#7AB8BD</color>
 
+    <!-- View tag key used by XboxUi to remember a grid's original side padding -->
+    <item name="xbox_base_padding" type="id" />
+
     <dimen name="xbox_screen_padding">48dp</dimen>
     <dimen name="xbox_header_button">48dp</dimen>
     <dimen name="xbox_tile_size">230dp</dimen>
