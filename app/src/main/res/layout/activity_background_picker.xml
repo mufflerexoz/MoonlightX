@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Xbox-style "MoonlightX background" picker on a green screen -->
+<!-- MoonlightX background picker on a green screen -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,9 +7,9 @@
     android:paddingLeft="@dimen/xbox_screen_padding"
     android:paddingRight="@dimen/xbox_screen_padding"
     android:paddingTop="32dp"
-    android:paddingBottom="28dp">
+    android:paddingBottom="24dp">
 
-    <!-- "Moonlight[X] background" -->
+    <!-- "Moonlight[X]" -->
     <LinearLayout
         android:id="@+id/pickerTitle"
         android:layout_width="wrap_content"
@@ -38,15 +38,6 @@
             android:text="@string/xbox_app_title_x"
             android:textColor="@color/xbox_green"
             android:textSize="24sp"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:text="@string/xbox_background_word"
-            android:textColor="#FFFFFF"
-            android:textSize="28sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -84,7 +75,7 @@
                 android:focusable="true"
                 android:contentDescription="@string/xbox_background_default"
                 android:nextFocusRight="@+id/optionGrey"
-                android:padding="4dp">
+                android:padding="5dp">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -120,7 +111,7 @@
                 android:focusable="true"
                 android:contentDescription="@string/xbox_background_grey"
                 android:nextFocusLeft="@id/optionDefault"
-                android:padding="4dp">
+                android:padding="5dp">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -132,44 +123,14 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- "Select (A) to apply" hint in a dark box -->
-    <LinearLayout
+    <!-- Version and mod credit -->
+    <TextView
+        android:id="@+id/pickerCredit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/xbox_hint_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/xbox_background_hint_select"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/xbox_a_button"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:text="@string/xbox_button_a"
-            android:textColor="@color/xbox_green"
-            android:textSize="16sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/xbox_background_hint_apply"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+        android:textColor="#CCFFFFFF"
+        android:textSize="14sp" />
 </RelativeLayout>

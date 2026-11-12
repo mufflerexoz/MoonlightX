@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Left-aligned rows of tiles. The list selector is disabled because the
-     highlighted tile shows its own title band instead. -->
+<!-- PC tiles, centered horizontally and vertically. The list selector is disabled
+     because the highlighted tile draws its own white outline. -->
 <GridView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragmentView"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
     android:numColumns="auto_fit"
     android:columnWidth="@dimen/xbox_tile_size"
     android:stretchMode="none"
@@ -12,7 +13,7 @@
     android:verticalSpacing="@dimen/xbox_tile_spacing"
     android:paddingLeft="@dimen/xbox_screen_padding"
     android:paddingRight="@dimen/xbox_screen_padding"
-    android:paddingTop="10dp"
+    android:paddingTop="12dp"
     android:paddingBottom="24dp"
     android:listSelector="@android:color/transparent"
     android:focusable="true"
@@ -20,4 +21,4 @@
     android:nextFocusUp="@id/settingsButton"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:gravity="start"/>
+    android:gravity="center"/>

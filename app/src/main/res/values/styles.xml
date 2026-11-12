@@ -20,16 +20,16 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-        <!-- Xbox green for all navigation/selection accents -->
-        <item name="android:colorAccent">@color/xbox_green</item>
-        <item name="android:colorControlActivated">@color/xbox_green</item>
-        <!-- Focus/press highlight in lists (e.g. Settings) is Xbox green -->
+        <!-- White for all navigation/selection highlights and accents -->
+        <item name="android:colorAccent">#FFFFFF</item>
+        <item name="android:colorControlActivated">#FFFFFF</item>
+        <!-- Focus/press highlight in lists (e.g. Settings) -->
         <item name="android:colorControlHighlight">@color/xbox_highlight</item>
         <item name="android:windowBackground">@drawable/xbox_background</item>
-        <!-- No grey/white system focus overlay: every highlight is Xbox green -->
+        <!-- Use only our own highlights, not the system's default focus overlay -->
         <item name="android:defaultFocusHighlightEnabled">false</item>
         <item name="android:textColorHighlight">@color/xbox_highlight</item>
-        <item name="android:colorEdgeEffect">@color/xbox_green</item>
+        <item name="android:colorEdgeEffect">#FFFFFF</item>
     </style>
 
     <style name="StreamBaseTheme" parent="AppBaseTheme">

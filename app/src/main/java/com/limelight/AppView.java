@@ -13,6 +13,7 @@ import com.limelight.nvstream.http.NvApp;
 import com.limelight.nvstream.http.NvHTTP;
 import com.limelight.nvstream.http.PairingManager;
 import com.limelight.preferences.PreferenceConfiguration;
+import com.limelight.preferences.StreamSettings;
 import com.limelight.ui.AdapterFragment;
 import com.limelight.ui.AdapterFragmentCallbacks;
 import com.limelight.ui.XboxUi;
@@ -315,6 +316,24 @@ public class AppView extends Activity implements AdapterFragmentCallbacks {
         TextView label = findViewById(R.id.appListText);
         setTitle(computerName);
         label.setText(computerName);
+
+        // Header buttons: Back to the PC list, Settings
+        findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        findViewById(R.id.appSettingsButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AppView.this, StreamSettings.class));
+            }
+        });
+
+        // Controller shortcut tips under the game list
+        TextView shortcuts = findViewById(R.id.xboxShortcuts);
+        shortcuts.setText(android.text.Html.fromHtml(getString(R.string.xbox_shortcuts_html)));
 
         // Bind to the computer manager service
         bindService(new Intent(this, ComputerManagerService.class), serviceConnection,

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Green Xbox-style PC tile. The name band appears only on the highlighted tile. -->
+<!-- PC tile: big monitor outline with the PC name in the bottom-left corner.
+     A white rounded outline marks the highlighted tile. -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/xbox_tile_size"
     android:layout_height="@dimen/xbox_tile_size"
     android:background="@drawable/xbox_tile"
-    android:foreground="@drawable/xbox_tile_ring"
     android:stateListAnimator="@animator/xbox_tile_state">
 
     <RelativeLayout
@@ -14,25 +14,25 @@
         android:layout_marginTop="34dp">
         <ImageView
             android:id="@+id/grid_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_centerHorizontal="true"
             android:importantForAccessibility="no" />
         <ImageView
             android:id="@+id/grid_overlay"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="30dp"
             android:importantForAccessibility="no" />
         <ProgressBar
             android:id="@+id/grid_spinner"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="30dp"
             android:indeterminate="true"
-            android:indeterminateTint="#FFFFFF" />
+            android:indeterminateTint="@color/xbox_launch_spinner" />
     </RelativeLayout>
 
     <TextView
@@ -40,14 +40,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@drawable/xbox_title_band"
         android:ellipsize="end"
         android:singleLine="true"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:textColor="@color/xbox_title_text"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:paddingBottom="16dp"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp" />
 </FrameLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Full-screen "Initializing Moonlight… / Starting 'App'" screen shown while a stream starts -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/xboxLaunchOverlay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/xbox_dark_grey"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="32dp">
+
+    <ProgressBar
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/xbox_launch_spinner" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="@string/xbox_launch_title"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/xboxLaunchApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:textColor="@color/xbox_text_secondary"
+        android:textSize="17sp" />
+
+    <!-- Current connection stage, kept faint -->
+    <TextView
+        android:id="@+id/xboxLaunchStage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textColor="#55FFFFFF"
+        android:textSize="13sp" />
+</LinearLayout>

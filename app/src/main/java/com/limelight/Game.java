@@ -34,6 +34,7 @@ import com.limelight.ui.StreamView;
 import com.limelight.utils.Dialog;
 import com.limelight.utils.ServerHelper;
 import com.limelight.utils.ShortcutHelper;
+import com.limelight.ui.LaunchOverlay;
 import com.limelight.utils.SpinnerDialog;
 import com.limelight.utils.UiHelper;
 
@@ -117,7 +118,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
     private SharedPreferences tombstonePrefs;
 
     private NvConnection conn;
-    private SpinnerDialog spinner;
+    private LaunchOverlay spinner;
     private boolean displayedFailureDialog = false;
     private boolean connecting = false;
     private boolean connected = false;
@@ -211,9 +212,9 @@ public class Game extends Activity implements SurfaceHolder.Callback,
         // Inflate the content
         setContentView(R.layout.activity_game);
 
-        // Start the spinner
-        spinner = SpinnerDialog.displayDialog(this, getResources().getString(R.string.conn_establishing_title),
-                getResources().getString(R.string.conn_establishing_msg), true);
+        // Show the full-screen "Initializing Moonlight…" launch screen
+        spinner = LaunchOverlay.show(this, getIntent().getStringExtra(EXTRA_APP_NAME),
+                findViewById(R.id.surfaceView));
 
         // Read the stream preferences
         prefConfig = PreferenceConfiguration.readPreferences(this);

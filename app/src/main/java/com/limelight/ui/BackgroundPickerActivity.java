@@ -21,6 +21,10 @@ public class BackgroundPickerActivity extends Activity {
         setContentView(R.layout.activity_background_picker);
         UiHelper.notifyNewRootView(this);
 
+        // Version and mod credit
+        ((android.widget.TextView) findViewById(R.id.pickerCredit)).setText(
+                getString(R.string.xbox_mod_credit, com.limelight.BuildConfig.VERSION_NAME));
+
         View defaultOption = findViewById(R.id.optionDefault);
         View grey = findViewById(R.id.optionGrey);
 

@@ -112,8 +112,9 @@ public final class XboxUi {
         applyBackground(activity);
         attachLogoClick(activity);
         attachButtonLabel(activity, R.id.settingsButton, R.id.settingsButtonLabel);
-        attachButtonLabel(activity, R.id.helpButton, R.id.helpButtonLabel);
         attachButtonLabel(activity, R.id.manuallyAddPc, R.id.manuallyAddPcLabel);
+        attachButtonLabel(activity, R.id.backButton, R.id.backButtonLabel);
+        attachButtonLabel(activity, R.id.appSettingsButton, R.id.appSettingsButtonLabel);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             WindowInsetsController controller = activity.getWindow().getInsetsController();

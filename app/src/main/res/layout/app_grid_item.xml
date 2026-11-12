@@ -1,51 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Square green Xbox-style game tile (same size as the PC tiles); box art is cropped to fill it. The title band appears only on the highlighted tile. -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/xbox_tile_size"
-    android:layout_height="@dimen/xbox_tile_size"
+<!-- Game tile: portrait box art with the game name underneath.
+     A white rounded outline marks the highlighted tile. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/xbox_app_tile_width"
+    android:layout_height="@dimen/xbox_app_tile_height"
     android:background="@drawable/xbox_tile"
-    android:foreground="@drawable/xbox_tile_ring"
+    android:orientation="vertical"
+    android:padding="14dp"
     android:stateListAnimator="@animator/xbox_tile_state">
 
-    <ImageView
-        android:id="@+id/grid_image"
+    <FrameLayout
+        android:id="@+id/grid_card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:cropToPadding="false"
-        android:scaleType="centerCrop"
-        android:importantForAccessibility="no" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <!-- Shown by the art loader only when there is no box art -->
-    <TextView
-        android:id="@+id/grid_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:gravity="center"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp" />
+        <ImageView
+            android:id="@+id/grid_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cropToPadding="false"
+            android:scaleType="centerCrop"
+            android:importantForAccessibility="no" />
 
-    <ImageView
-        android:id="@+id/grid_overlay"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="10dp"
-        android:importantForAccessibility="no" />
+        <!-- Shown by the art loader only when there is no box art -->
+        <TextView
+            android:id="@+id/grid_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/grid_overlay"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="10dp"
+            android:importantForAccessibility="no" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/grid_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@drawable/xbox_title_band"
+        android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:singleLine="true"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:textColor="@color/xbox_title_text"
-        android:textSize="15sp"
-        android:textStyle="bold" />
-</FrameLayout>
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+</LinearLayout>

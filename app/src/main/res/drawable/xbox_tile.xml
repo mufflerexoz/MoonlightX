@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Green Xbox tile; a lighter green while pressed -->
+<!-- Tile: barely-there fill, white rounded outline when highlighted or pressed -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <corners android:radius="3dp" />
-            <solid android:color="@color/xbox_green_light" />
+            <corners android:radius="10dp" />
+            <solid android:color="#1FFFFFFF" />
+            <stroke android:width="2dp" android:color="#FFFFFF" />
+        </shape>
+    </item>
+    <item android:state_activated="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="10dp" />
+            <solid android:color="#0FFFFFFF" />
+            <stroke android:width="2dp" android:color="#FFFFFF" />
         </shape>
     </item>
     <item>
         <shape android:shape="rectangle">
-            <corners android:radius="3dp" />
-            <solid android:color="@color/xbox_green" />
+            <corners android:radius="10dp" />
+            <solid android:color="#0AFFFFFF" />
         </shape>
     </item>
 </selector>

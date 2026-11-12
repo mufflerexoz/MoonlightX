@@ -1,5 +1,5 @@
-<!-- Xbox-style screen: logo + title on the left, round buttons top right,
-     then a section heading with a left-aligned row of tiles a little above the bottom -->
+<!-- Game list: back button + PC name on the left, Settings on the right,
+     portrait game tiles centered, controller shortcuts at the bottom -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,54 +11,57 @@
         android:id="@+id/xboxHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:baselineAligned="false"
+        android:gravity="top"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/xbox_screen_padding"
         android:paddingRight="@dimen/xbox_screen_padding"
-        android:paddingTop="24dp">
-
-        <include layout="@layout/xbox_header_logo" />
+        android:paddingTop="28dp">
 
         <LinearLayout
-            android:id="@+id/xboxAppTitleBlock"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="12dp"
-            android:layout_marginStart="12dp"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
-            <!-- Name of the selected PC, replacing "Moonlight" -->
+            <ImageButton
+                android:id="@+id/backButton"
+                android:contentDescription="@string/xbox_back"
+                android:src="@drawable/ic_xbox_back"
+                style="@style/XboxHeaderButton" />
             <TextView
-                android:id="@+id/appListText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:preferKeepClear="true"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/xbox_app_subtitle"
-                android:textColor="#FFFFFF"
-                android:textSize="13sp"
-                android:textStyle="bold" />
+                android:id="@+id/backButtonLabel"
+                android:text="@string/xbox_back"
+                style="@style/XboxHeaderLabel" />
         </LinearLayout>
 
+        <!-- Name of the selected PC -->
+        <TextView
+            android:id="@+id/appListText"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:gravity="center_vertical"
+            android:preferKeepClear="true"
+            style="@style/XboxHeaderTitle" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/appSettingsButton"
+                android:contentDescription="@string/xbox_settings"
+                android:src="@drawable/ic_xbox_settings"
+                style="@style/XboxHeaderButton" />
+            <TextView
+                android:id="@+id/appSettingsButtonLabel"
+                android:text="@string/xbox_settings"
+                style="@style/XboxHeaderLabel" />
+        </LinearLayout>
     </LinearLayout>
-
-    <!-- Pushes the tile row down from the header, leaving room below it -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.4" />
-
-    <TextView
-        android:id="@+id/xboxSectionTitle"
-        android:text="@string/xbox_games_and_apps"
-        style="@style/XboxSectionTitle" />
 
     <FrameLayout
         android:id="@+id/appFragmentContainer"
@@ -67,4 +70,18 @@
         android:layout_weight="1"
         android:clipChildren="false"
         android:clipToPadding="false"/>
+
+    <TextView
+        android:id="@+id/xboxShortcuts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lineSpacingExtra="4dp"
+        android:paddingLeft="@dimen/xbox_screen_padding"
+        android:paddingRight="@dimen/xbox_screen_padding"
+        android:paddingTop="8dp"
+        android:paddingBottom="20dp"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp" />
+
 </LinearLayout>
