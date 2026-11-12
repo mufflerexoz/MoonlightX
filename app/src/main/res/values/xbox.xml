@@ -29,22 +29,6 @@
     <!-- Controller tips shown under the game list (matching Moonlight for Android's real combos) -->
     <string name="xbox_shortcuts_html"><![CDATA[<b>Useful Shortcuts:</b> hold Menu to toggle mouse mode · Menu+View for the Guide/Xbox button · Menu+View+LB+RB to quit the stream<br><b>In Mouse mode:</b> Ⓐ Left click &#160; Ⓑ Right click &#160; D-pad Scroll &#160; Sticks Move pointer]]></string>
 
-    <!-- Name shown under a header button while it is highlighted -->
-    <style name="XboxHeaderLabel">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">4dp</item>
-        <item name="android:background">@drawable/xbox_label_bg</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingRight">10dp</item>
-        <item name="android:paddingTop">4dp</item>
-        <item name="android:paddingBottom">4dp</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:visibility">invisible</item>
-    </style>
-
     <!-- Square rounded header button (Add PC, Settings, Back) -->
     <style name="XboxHeaderButton">
         <item name="android:layout_width">@dimen/xbox_header_button</item>

@@ -29,11 +29,33 @@
             android:layout_marginStart="14dp"
             android:gravity="center_vertical"
             android:orientation="vertical">
-            <TextView
+            <!-- "Moonlight[X]" -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/xbox_app_title"
-                style="@style/XboxHeaderTitle" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/xbox_app_title"
+                    style="@style/XboxHeaderTitle" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:background="@drawable/xbox_x_badge"
+                    android:includeFontPadding="false"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="1dp"
+                    android:text="@string/xbox_app_title_x"
+                    android:textColor="@color/xbox_dark_grey"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -48,10 +70,6 @@
                 android:src="@drawable/ic_xbox_plus"
                 android:preferKeepClear="true"
                 style="@style/XboxHeaderButton" />
-            <TextView
-                android:id="@+id/manuallyAddPcLabel"
-                android:text="@string/xbox_add_pc"
-                style="@style/XboxHeaderLabel" />
         </LinearLayout>
 
         <LinearLayout
@@ -68,10 +86,6 @@
                 android:src="@drawable/ic_xbox_settings"
                 android:preferKeepClear="true"
                 style="@style/XboxHeaderButton" />
-            <TextView
-                android:id="@+id/settingsButtonLabel"
-                android:text="@string/xbox_settings"
-                style="@style/XboxHeaderLabel" />
         </LinearLayout>
 
         <!-- Not shown in this design; kept so the existing Help code keeps working -->

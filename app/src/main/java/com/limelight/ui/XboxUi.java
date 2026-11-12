@@ -54,42 +54,6 @@ public final class XboxUi {
     }
 
     /**
-     * Shows a header button's name below it while the button is highlighted
-     * (controller/remote focus) or held down with a finger.
-     */
-    @SuppressLint("ClickableViewAccessibility")
-    private static void attachButtonLabel(Activity activity, int buttonId, int labelId) {
-        final View button = activity.findViewById(buttonId);
-        final View label = activity.findViewById(labelId);
-        if (button == null || label == null) {
-            return;
-        }
-
-        button.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                label.setVisibility(hasFocus ? View.VISIBLE : View.INVISIBLE);
-            }
-        });
-        button.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getActionMasked()) {
-                    case MotionEvent.ACTION_DOWN:
-                        label.setVisibility(View.VISIBLE);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                        label.setVisibility(v.isFocused() ? View.VISIBLE : View.INVISIBLE);
-                        break;
-                }
-                // Don't consume: the click still goes through
-                return false;
-            }
-        });
-    }
-
-    /**
      * Makes the MoonlightX logo in the header open the background picker.
      */
     public static void attachLogoClick(final Activity activity) {
@@ -111,10 +75,6 @@ public final class XboxUi {
     public static void applyChrome(Activity activity) {
         applyBackground(activity);
         attachLogoClick(activity);
-        attachButtonLabel(activity, R.id.settingsButton, R.id.settingsButtonLabel);
-        attachButtonLabel(activity, R.id.manuallyAddPc, R.id.manuallyAddPcLabel);
-        attachButtonLabel(activity, R.id.backButton, R.id.backButtonLabel);
-        attachButtonLabel(activity, R.id.appSettingsButton, R.id.appSettingsButtonLabel);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             WindowInsetsController controller = activity.getWindow().getInsetsController();

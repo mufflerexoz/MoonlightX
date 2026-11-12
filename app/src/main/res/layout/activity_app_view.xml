@@ -28,10 +28,6 @@
                 android:contentDescription="@string/xbox_back"
                 android:src="@drawable/ic_xbox_back"
                 style="@style/XboxHeaderButton" />
-            <TextView
-                android:id="@+id/backButtonLabel"
-                android:text="@string/xbox_back"
-                style="@style/XboxHeaderLabel" />
         </LinearLayout>
 
         <!-- Name of the selected PC -->
@@ -56,10 +52,6 @@
                 android:contentDescription="@string/xbox_settings"
                 android:src="@drawable/ic_xbox_settings"
                 style="@style/XboxHeaderButton" />
-            <TextView
-                android:id="@+id/appSettingsButtonLabel"
-                android:text="@string/xbox_settings"
-                style="@style/XboxHeaderLabel" />
         </LinearLayout>
     </LinearLayout>
 
