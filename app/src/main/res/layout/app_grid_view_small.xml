@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Game tiles, centered. The list selector is disabled because the highlighted
+<!-- Game tiles, centered horizontally and vertically. The list selector is disabled because the highlighted
      tile draws its own white outline. -->
 <GridView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragmentView"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:numColumns="auto_fit"
     android:columnWidth="140dp"
     android:stretchMode="none"

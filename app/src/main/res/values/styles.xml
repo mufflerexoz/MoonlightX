@@ -25,7 +25,7 @@
         <item name="android:colorControlActivated">#FFFFFF</item>
         <!-- Focus/press highlight in lists (e.g. Settings) -->
         <item name="android:colorControlHighlight">@color/xbox_highlight</item>
-        <item name="android:windowBackground">@drawable/xbox_background</item>
+        <item name="android:windowBackground">@color/xbox_dark_grey</item>
         <!-- Use only our own highlights, not the system's default focus overlay -->
         <item name="android:defaultFocusHighlightEnabled">false</item>
         <item name="android:textColorHighlight">@color/xbox_highlight</item>

@@ -21,7 +21,7 @@
     <string name="xbox_add_pc">Add PC</string>
     <string name="xbox_back">Back</string>
     <string name="xbox_background_title">MoonlightX background</string>
-    <string name="xbox_background_default">Default</string>
+    <string name="xbox_background_dashboard">XBOX Dashboard</string>
     <string name="xbox_background_grey">Dark Grey</string>
     <string name="xbox_mod_credit">Version %1$s · MoonlightX mod by mufflerexoz</string>
     <string name="xbox_launch_title">Initializing Moonlight…</string>

@@ -37,7 +37,7 @@ public class LaunchOverlay {
         }
 
         // Use the background chosen in the MoonlightX background picker
-        if (!XboxUi.BACKGROUND_DARK_GREY.equals(XboxUi.getBackground(activity))) {
+        if (XboxUi.isDashboardBackground(activity)) {
             root.setBackgroundResource(R.drawable.xbox_background);
         }
 

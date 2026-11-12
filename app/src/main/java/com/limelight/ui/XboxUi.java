@@ -1,11 +1,9 @@
 package com.limelight.ui;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowInsets;
@@ -13,6 +11,7 @@ import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.GridView;
 
 import com.limelight.R;
 
@@ -22,15 +21,27 @@ import com.limelight.R;
 public final class XboxUi {
     private XboxUi() {}
 
-    public static final String BACKGROUND_DEFAULT = "default";
     public static final String BACKGROUND_DARK_GREY = "dark_grey";
+    public static final String BACKGROUND_DASHBOARD = "dashboard";
 
     private static final String PREFS_NAME = "xbox_ui";
     private static final String PREF_BACKGROUND = "background";
 
+    /**
+     * The chosen background: Dark Grey by default, or the XBOX Dashboard image.
+     */
     public static String getBackground(Context context) {
-        return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                .getString(PREF_BACKGROUND, BACKGROUND_DEFAULT);
+        String value = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                .getString(PREF_BACKGROUND, BACKGROUND_DARK_GREY);
+        // Earlier test builds saved the image option as "default" or "blur_glass"
+        if ("default".equals(value) || "blur_glass".equals(value)) {
+            return BACKGROUND_DASHBOARD;
+        }
+        return value;
+    }
+
+    public static boolean isDashboardBackground(Context context) {
+        return BACKGROUND_DASHBOARD.equals(getBackground(context));
     }
 
     public static void setBackground(Context context, String background) {
@@ -41,15 +52,15 @@ public final class XboxUi {
     }
 
     /**
-     * Applies the chosen app background (Default image, or Dark Grey) to this
+     * Applies the chosen app background (Dark Grey by default, or the XBOX Dashboard image) to this
      * activity's window. Safe to call again in onResume() to pick up a new choice.
      */
     public static void applyBackground(Activity activity) {
-        if (BACKGROUND_DARK_GREY.equals(getBackground(activity))) {
-            activity.getWindow().setBackgroundDrawableResource(R.color.xbox_dark_grey);
+        if (isDashboardBackground(activity)) {
+            activity.getWindow().setBackgroundDrawableResource(R.drawable.xbox_background);
         }
         else {
-            activity.getWindow().setBackgroundDrawableResource(R.drawable.xbox_background);
+            activity.getWindow().setBackgroundDrawableResource(R.color.xbox_dark_grey);
         }
     }
 
@@ -97,55 +108,74 @@ public final class XboxUi {
     }
 
     /**
-     * Keeps exactly one tile "highlighted" (activated), like the Xbox home. The highlighted
-     * tile grows slightly and shows its title in a semi-transparent black band. The highlight
-     * follows controller/remote selection and the last tile touched.
+     * Tile highlight and layout for the PC and game grids:
+     * - The white outline follows navigation: only the tile selected with the controller/remote
+     *   is highlighted, and only while the grid has focus (moving up to the header buttons
+     *   clears it). With touch, the outline shows while a tile is pressed.
+     * - Tiles are truly centered: the column count is limited to the number of tiles, so one or
+     *   two tiles sit in the middle of the screen instead of in the first slots of a wide grid.
      */
-    @SuppressLint("ClickableViewAccessibility")
     public static void attachTileHighlight(final AbsListView listView) {
-        final int[] highlighted = {0};
-
         listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                highlighted[0] = position;
-                refresh(listView, highlighted[0]);
+                refresh(listView);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Keep the last highlight
+                refresh(listView);
             }
         });
 
-        listView.setOnTouchListener(new View.OnTouchListener() {
+        listView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-                    int position = listView.pointToPosition((int) event.getX(), (int) event.getY());
-                    if (position != AdapterView.INVALID_POSITION) {
-                        highlighted[0] = position;
-                        refresh(listView, position);
-                    }
-                }
-                // Never consume: clicks and long-press menus keep working
-                return false;
+            public void onFocusChange(View v, boolean hasFocus) {
+                refresh(listView);
             }
         });
 
-        // Children are recycled on scroll and data changes, so re-apply after every layout
+        listView.getViewTreeObserver().addOnTouchModeChangeListener(new ViewTreeObserver.OnTouchModeChangeListener() {
+            @Override
+            public void onTouchModeChanged(boolean isInTouchMode) {
+                refresh(listView);
+            }
+        });
+
+        // Runs after data changes, scrolling and rotation: re-center and re-apply the highlight
         listView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                if (listView.getCount() > 0 && highlighted[0] >= listView.getCount()) {
-                    highlighted[0] = listView.getCount() - 1;
+                if (listView instanceof GridView) {
+                    fitColumns((GridView) listView);
                 }
-                refresh(listView, highlighted[0]);
+                refresh(listView);
             }
         });
     }
 
-    private static void refresh(AbsListView listView, int highlighted) {
+    private static void fitColumns(GridView grid) {
+        int count = grid.getCount();
+        int columnWidth = grid.getRequestedColumnWidth();
+        int spacing = grid.getRequestedHorizontalSpacing();
+        int available = grid.getWidth() - grid.getPaddingLeft() - grid.getPaddingRight();
+        if (count <= 0 || columnWidth <= 0 || available <= 0) {
+            return;
+        }
+
+        int fit = Math.max(1, (available + spacing) / (columnWidth + spacing));
+        int columns = Math.min(count, fit);
+        if (grid.getNumColumns() != columns) {
+            grid.setNumColumns(columns);
+        }
+    }
+
+    private static void refresh(AbsListView listView) {
+        int highlighted = AdapterView.INVALID_POSITION;
+        if (listView.hasFocus() && !listView.isInTouchMode()) {
+            highlighted = listView.getSelectedItemPosition();
+        }
+
         int first = listView.getFirstVisiblePosition();
         for (int i = 0; i < listView.getChildCount(); i++) {
             View child = listView.getChildAt(i);

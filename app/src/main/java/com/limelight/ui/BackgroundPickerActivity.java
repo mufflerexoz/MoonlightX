@@ -25,13 +25,13 @@ public class BackgroundPickerActivity extends Activity {
         ((android.widget.TextView) findViewById(R.id.pickerCredit)).setText(
                 getString(R.string.xbox_mod_credit, com.limelight.BuildConfig.VERSION_NAME));
 
-        View defaultOption = findViewById(R.id.optionDefault);
+        View dashboard = findViewById(R.id.optionDashboard);
         View grey = findViewById(R.id.optionGrey);
 
-        defaultOption.setOnClickListener(new View.OnClickListener() {
+        dashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                choose(XboxUi.BACKGROUND_DEFAULT);
+                choose(XboxUi.BACKGROUND_DASHBOARD);
             }
         });
         grey.setOnClickListener(new View.OnClickListener() {
@@ -42,11 +42,11 @@ public class BackgroundPickerActivity extends Activity {
         });
 
         // Start with the current choice selected
-        if (XboxUi.BACKGROUND_DARK_GREY.equals(XboxUi.getBackground(this))) {
-            grey.requestFocus();
+        if (XboxUi.isDashboardBackground(this)) {
+            dashboard.requestFocus();
         }
         else {
-            defaultOption.requestFocus();
+            grey.requestFocus();
         }
     }
 
