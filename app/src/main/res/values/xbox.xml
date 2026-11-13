@@ -29,8 +29,9 @@
     <string name="xbox_mod_credit">Version %1$s · MoonlightX mod by mufflerexoz</string>
     <string name="xbox_launch_title">Initializing Moonlight…</string>
     <string name="xbox_launch_app">Starting \'%1$s\'</string>
-    <!-- Controller tips shown under the game list (matching Moonlight for Android's real combos) -->
-    <string name="xbox_shortcuts_html"><![CDATA[<b>Useful Shortcuts:</b> hold Menu to toggle mouse mode · Menu+View for the Guide/Xbox button · Menu+View+LB+RB to quit the stream<br><b>In Mouse mode:</b> Ⓐ Left click &#160; Ⓑ Right click &#160; D-pad Scroll &#160; Sticks Move pointer]]></string>
+    <!-- Controller tips shown under the game list (Moonlight for Android's real combos).
+         One tip per row; {menu}, {view} and {xbox} are replaced with button icons. -->
+    <string name="xbox_shortcuts_html"><![CDATA[<b>Useful Shortcuts:</b> hold {menu} to toggle mouse mode<br>{menu}+{view} for the {xbox} Guide button · {menu}+{view}+LB+RB to quit the stream<br><b>In Mouse mode:</b> Ⓐ Left click &#160; Ⓑ Right click &#160; D-pad Scroll &#160; Sticks Move pointer]]></string>
 
     <!-- Square rounded header button (Add PC, Settings, Back) -->
     <style name="XboxHeaderButton">

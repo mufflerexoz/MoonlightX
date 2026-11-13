@@ -3,6 +3,14 @@ package com.limelight.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ImageSpan;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -206,6 +214,76 @@ public final class XboxUi {
             if (child.isActivated() != activated) {
                 child.setActivated(activated);
             }
+        }
+    }
+
+    /**
+     * Builds the controller shortcut tips shown under the game list: three centered rows,
+     * with the Menu, View and Xbox (Guide) buttons drawn as icons sized to the text.
+     */
+    public static CharSequence buildShortcutsText(Context context, float textSizePx) {
+        String html = context.getString(R.string.xbox_shortcuts_html);
+        Spanned parsed;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            parsed = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
+        }
+        else {
+            parsed = Html.fromHtml(html);
+        }
+
+        SpannableStringBuilder text = new SpannableStringBuilder(parsed);
+        int iconSize = Math.round(textSizePx * 1.25f);
+        replaceTokenWithIcon(context, text, "{menu}", R.drawable.ic_xbox_btn_menu, iconSize);
+        replaceTokenWithIcon(context, text, "{view}", R.drawable.ic_xbox_btn_view, iconSize);
+        replaceTokenWithIcon(context, text, "{xbox}", R.drawable.moonlightx_icon, iconSize);
+        return text;
+    }
+
+    private static void replaceTokenWithIcon(Context context, SpannableStringBuilder text,
+                                             String token, int drawableId, int size) {
+        int index;
+        while ((index = text.toString().indexOf(token)) >= 0) {
+            Drawable icon = context.getResources().getDrawable(drawableId).mutate();
+            icon.setBounds(0, 0, size, size);
+            text.replace(index, index + token.length(), "\u00A0");
+            text.setSpan(new CenteredImageSpan(icon), index, index + 1,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+    }
+
+    /**
+     * Image span that is vertically centered on the text line instead of sitting on the baseline.
+     */
+    private static class CenteredImageSpan extends ImageSpan {
+        CenteredImageSpan(Drawable drawable) {
+            super(drawable);
+        }
+
+        @Override
+        public int getSize(Paint paint, CharSequence text, int start, int end, Paint.FontMetricsInt fm) {
+            Rect bounds = getDrawable().getBounds();
+            if (fm != null) {
+                Paint.FontMetricsInt textFm = paint.getFontMetricsInt();
+                int textCenter = (textFm.descent + textFm.ascent) / 2;
+                int half = bounds.height() / 2;
+                fm.ascent = Math.min(textFm.ascent, textCenter - half);
+                fm.descent = Math.max(textFm.descent, textCenter + half);
+                fm.top = fm.ascent;
+                fm.bottom = fm.descent;
+            }
+            return bounds.right;
+        }
+
+        @Override
+        public void draw(Canvas canvas, CharSequence text, int start, int end, float x,
+                         int top, int y, int bottom, Paint paint) {
+            Drawable drawable = getDrawable();
+            Paint.FontMetricsInt fm = paint.getFontMetricsInt();
+            int transY = y + (fm.descent + fm.ascent) / 2 - drawable.getBounds().height() / 2;
+            canvas.save();
+            canvas.translate(x, transY);
+            drawable.draw(canvas);
+            canvas.restore();
         }
     }
 }

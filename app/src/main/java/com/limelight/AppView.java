@@ -333,7 +333,7 @@ public class AppView extends Activity implements AdapterFragmentCallbacks {
 
         // Controller shortcut tips under the game list
         TextView shortcuts = findViewById(R.id.xboxShortcuts);
-        shortcuts.setText(android.text.Html.fromHtml(getString(R.string.xbox_shortcuts_html)));
+        shortcuts.setText(XboxUi.buildShortcutsText(this, shortcuts.getTextSize()));
 
         // Bind to the computer manager service
         bindService(new Intent(this, ComputerManagerService.class), serviceConnection,
