@@ -2,11 +2,21 @@
 
 Features:
 no improvement related (maybe in the future)
-1. UI replacement from standard to custom XBOX dashboard Design Languaged.
+1. UI replacement from standard Android to XBOX moonlight app version design. (touch/controller).
 
+# v12.2
+<img width="3840" height="2160" alt="image" src="https://github.com/user-attachments/assets/92f0b4bf-1a43-43e6-a399-d6a3ed03e6dc" />
+1. Main home.
 
-#
-#
+<img width="3840" height="2160" alt="image" src="https://github.com/user-attachments/assets/704c99db-d535-42f0-b1d4-595b0b9df7ef" />
+2. Additional Wallpaper when click top left icon.
+
+<img width="3840" height="2160" alt="image" src="https://github.com/user-attachments/assets/13cac16a-acf0-42bb-ace3-6bb2cfef0ead" />
+3. Selected server.
+
+<img width="3840" height="2160" alt="image" src="https://github.com/user-attachments/assets/bb3fc816-8ef6-4bd7-bf87-53d56d6bc38d" />
+4. Connection screen.
+
 #
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/232a8tadrrn8jv0k/branch/master?svg=true)](https://ci.appveyor.com/project/cgutman/moonlight-android/branch/master)
 [![Translation Status](https://hosted.weblate.org/widgets/moonlight/-/moonlight-android/svg-badge.svg)](https://hosted.weblate.org/projects/moonlight/moonlight-android/)
